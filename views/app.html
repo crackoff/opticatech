@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Онлайн-примерочная</title>
+</head>
+<body>
+
+<video id="v" style="display:none;" autoplay></video>
+<canvas id="c" height="480" width="640" style="border:1px;"></canvas>
+<button id="b">Take photo</button>
+<canvas id="d" height="100" width="100" style="display:none;"></canvas>
+
+
+<script language="JavaScript" src="/assets/vendor_components/jquery/dist/jquery.min.js"></script>
+<script language="JavaScript">
+
+
+    function drawToCanvas(imageData) {
+        var canvas = document.getElementById("c");
+        var context = canvas.getContext('2d');
+
+        var img = new Image;
+        img.onload = function () {
+            context.drawImage(img, 0, 0); // Or at whatever offset you like
+        };
+        img.src = imageData;
+    }
+
+    // Older browsers might not implement mediaDevices at all, so we set an empty object first
+    if (navigator.mediaDevices === undefined) {
+        navigator.mediaDevices = {};
+    }
+
+    // Some browsers partially implement mediaDevices. We can't just assign an object
+    // with getUserMedia as it would overwrite existing properties.
+    // Here, we will just add the getUserMedia property if it's missing.
+    if (navigator.mediaDevices.getUserMedia === undefined) {
+        navigator.mediaDevices.getUserMedia = function (constraints) {
+
+            // First get ahold of the legacy getUserMedia, if present
+            var getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+            // Some browsers just don't implement it - return a rejected promise with an error
+            // to keep a consistent interface
+            if (!getUserMedia) {
+                return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
+            }
+
+            // Otherwise, wrap the call to the old navigator.getUserMedia with a Promise
+            return new Promise(function (resolve, reject) {
+                getUserMedia.call(navigator, constraints, resolve, reject);
+            });
+        }
+    }
+
+    navigator.mediaDevices.getUserMedia({audio: false, video: {facingMode: "user"}})
+        .then(function (stream) {
+
+            var video = document.getElementById("v");
+            var button = document.getElementById("b");
+            var drc = document.getElementById("d");
+
+            // Older browsers may not have srcObject
+            if ("srcObject" in video) {
+                video.srcObject = stream;
+            } else {
+                // Avoid using this in new browsers, as it is going away.
+                video.src = window.URL.createObjectURL(stream);
+            }
+
+            video.onloadedmetadata = function (e) {
+                video.play();
+            };
+
+            var senfFunc = function () {
+
+                var width = 640, height = 480;
+                drc.width = width;
+                drc.height = height;
+                drc.getContext("2d").drawImage(video, 0, 0, width, height);
+                var img = drc.toDataURL("image/webp");
+
+                $.ajax({
+                    url: "/app/process",
+                    data: JSON.stringify({
+                        model_id: 2,
+                        img: img
+                    }),
+                    type: 'POST',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        drawToCanvas(data);
+                        senfFunc();
+                    },
+                    error: function (s, t) {
+                        console.log("error", s, t);
+                    }
+                });
+            };
+
+            button.onclick = senfFunc;
+        })
+        .catch(function (err) {
+            console.log(err.name + ": " + err.message);
+        });
+</script>
+
+</body>
+</html>

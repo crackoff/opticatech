@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% block head %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="Консоль администрирования optica.tech">
+        <meta name="author" content="Oleg Krekov">
+
+        <title>{% block title %}{% endblock %} -  optica.tech</title>
+
+        <!-- Bootstrap 4.0-->
+        <link rel="stylesheet" href="/assets/vendor_components/bootstrap/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/assets/vendor_components/bootstrap/dist/css/bootstrap-extend.min.css"/>
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="/assets/vendor_components/font-awesome/css/font-awesome.min.css"/>
+
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="/assets/vendor_components/Ionicons/css/ionicons.min.css"/>
+
+        <!-- Glyphicons -->
+        <link rel="stylesheet" href="/assets/vendor_components/glyphicons/glyphicon.css"/>
+
+        <!-- Select2 -->
+        <link rel="stylesheet" href="/assets/vendor_components/select2/dist/css/select2.min.css"/>
+
+        <!-- alerts CSS  -->
+        <link rel="stylesheet" href="/assets/vendor_components/sweetalert/sweetalert.css"/>
+
+        <!-- Site custom styles -->
+        <link rel="stylesheet" href="/static/style.css"/>
+        <link rel="stylesheet" href="/static/skins/_all-skins.css"/>
+
+        <!-- google font -->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+        <!-- jQuery 3 -->
+        <script type="text/javascript" src="/assets/vendor_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- popper -->
+        <script type="text/javascript" src="/assets/vendor_components/popper/dist/popper.min.js"></script>
+
+        <!-- Bootstrap 4.0-->
+        <script type="text/javascript" src="/assets/vendor_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Select2 -->
+        <script type="text/javascript" src="/assets/vendor_components/select2/dist/js/select2.full.js"></script>
+
+        <!-- DataTables -->
+        <script type="text/javascript"
+                src="/assets/vendor_components/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript"
+                src="/assets/vendor_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+        <!-- SlimScroll -->
+        <script type="text/javascript"
+                src="/assets/vendor_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+
+        <!-- iCheck 1.0.1 -->
+        <script type="text/javascript" src="/assets/vendor_plugins/iCheck/icheck.min.js"></script>
+
+        <!-- FastClick -->
+        <script type="text/javascript" src="/assets/vendor_components/fastclick/lib/fastclick.js"></script>
+
+        <!-- Sweet-Alert -->
+        <script type="text/javascript" src="/assets/vendor_components/sweetalert/sweetalert.min.js"></script>
+
+        <!-- foxadmin App -->
+        <script type="text/javascript" src="/static/template.js"></script>
+
+        <!-- This is data table -->
+        <script type="text/javascript"
+                src="/assets/vendor_plugins/DataTables-1.10.15/media/js/jquery.dataTables.min.js"></script>
+
+        <!-- foxadmin for Data Table -->
+        <script type="text/javascript" src="/static/pages/data-table.js"></script>
+
+        <!-- foxadmin for advanced form element -->
+        {# <script type="text/javascript" src="/static/pages/advanced-form-element.js" /> #}
+
+        <!-- foxadmin for Data Table -->
+        <script type="text/javascript" src="/static/optica-tech.js"></script>
+    {% endblock %}
+</head>
+
+
+<body class="hold-transition skin-red sidebar-mini">
+<div class="wrapper">
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini">
+                <b>OT</b>
+            </span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg">Оптика.TECH</span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- User Account: style can be found in dropdown.less -->
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="/images/user2-160x160.jpg" class="user-image rounded-circle" alt="User Image">
+            </a>
+            <ul class="dropdown-menu scale-up">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="/images/user2-160x160.jpg" class="rounded float-left" alt="User Image">
+
+                <p>
+                  <small>crackoff@gmail.com</small>
+                  Администратор
+                </p>
+              </li>
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="#" class="btn btn-block btn-primary">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href="#" class="btn btn-block btn-danger">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    </header>
+
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">НАВИГАЦИЯ</li>
+                <li class="active">
+                    <a href="/">
+                        <i class="fa fa-dashboard"></i> <span>Статистика</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/admin">
+                        <i class="fa fa-eye"></i>
+                        <span>Мои модели очков</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <i class="fa fa-money"></i>
+                        <span>Оплата</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-12">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer">
+        <div class="pull-right d-none d-sm-inline-block">
+            <b>Version</b> 0.2
+        </div>&copy; 2017 Олег Креков. Все права защищены.
+    </footer>
+</div>
+
+</body>
+</html>

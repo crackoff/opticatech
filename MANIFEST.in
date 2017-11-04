@@ -1,0 +1,3 @@
+graft view
+graft static
+include schema.sql

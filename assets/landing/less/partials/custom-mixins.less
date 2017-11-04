@@ -1,0 +1,27 @@
+.placeholder-color(@color) {
+	&::-webkit-input-placeholder {
+		color: @color;
+	}
+	&:-moz-placeholder {
+		color: @color;
+		opacity:  1;
+	}
+	&::-moz-placeholder {
+		color: @color;
+		opacity:  1;
+	}
+	&:-ms-input-placeholder {
+		color: @color;
+	}
+}
+
+.headings() {
+	font-weight: 100;
+	margin: 0 0 10px;
+	text-align: center;
+}
+
+.on-overlay(@position: relative) {
+	position: @position;
+	z-index: 5;
+}

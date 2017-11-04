@@ -1,0 +1,291 @@
+@path: "bootstrap";
+
+@import "variables";
+@import "@{path}/mixins";
+
+@media (max-width: 480px) {
+	h2 {
+		font-size: 40px;
+	}
+	h3 {
+		font-size: 28px;
+	}
+
+	#header {
+		position: relative;
+
+		.navbar-brand {
+			font-size: 27px;
+		}
+		.navbar-collapse {
+			margin-left: -30px;
+			margin-right: -30px;
+		}
+	}
+
+	.container {
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+
+	.section {
+		padding: 40px 0;
+
+		&-header {
+			margin-bottom: 40px;
+		}
+	}
+
+	.home-app {
+		height: auto;
+
+		h1 {
+			font-size: 35px;
+		}
+
+		.home-inner {
+			padding: 40px 0;
+		}
+	}
+
+	.feature-item {
+		@ib-size: 45px;
+		.icon-block {
+			font-size: 20px;
+			line-height: @ib-size;
+			top: 0;
+			width: @ib-size;
+			height: @ib-size;
+		}
+		.content {
+			margin-left: 60px;
+		}
+	}
+
+	.fact-item {
+		.digits {
+			font-size: 65px;
+			line-height: 65px;
+		}
+	}
+
+	.portfolio-item {
+		width: 100%;
+	}
+
+	.price-block {
+		.amount {
+			font-size: 60px;
+
+			@promo-size: 35px;
+			.promo {
+				font-size: 12px;
+				line-height: @promo-size;
+				top: 3px;
+				right: -27px;
+				width: @promo-size;
+				height: @promo-size;
+			}
+		}
+		.inf {
+			margin: 10px 20px;
+
+			li {
+				padding: 13px 0;
+			}
+		}
+	}
+
+	.contact-block {
+		@font-size: 22px;
+		.item {
+			font-size: @font-size;
+			line-height: @font-size;
+
+			span {
+				width: 25px;
+			}
+			i {
+				&.fa-mobile {
+					font-size: @font-size + 5;
+				}
+				&.fa-skype {
+					font-size: @font-size;
+				}
+				&.fa-envelope {
+					font-size: @font-size - 5;
+				}
+			}
+		}
+		.social {
+			li {
+				@icon-size: 37px;
+				a {
+					font-size: 16px;
+					line-height: @icon-size;
+					width: @icon-size;
+					height: @icon-size;
+				}
+			}
+		}
+	}
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm-min) {
+
+	// NAVBAR
+	#header {
+		background: transparent;
+		height: @navbar-height;
+
+		&.selected {
+			background: @brand-primary;
+
+			.navbar-brand {
+				opacity: 1;
+			}
+		}
+		.navbar-brand {
+			line-height: @navbar-height;
+			opacity: 0;
+		}
+		.navbar-nav {
+			margin-top: 20px;
+			margin-right: -25px;
+
+			& > li {
+				& > a {
+					border: 0;
+					margin: 0 15px;
+					padding: 10px 0;
+				}
+				&.active > a {
+					background: transparent;
+					border-bottom: 2px solid #fff;
+				}
+			}
+		}
+		.navbar-collapse {
+			background: transparent;
+			margin-right: 0;
+			margin-left: 0;
+		}
+	}
+
+	// HOME SECTION
+	.home-default {
+		header {
+			h1 {
+				font-size: 72px;
+				margin-bottom: 20px;
+			}
+		}
+		.home-sub-title {
+			font-size: 26px;
+		}
+	}
+	.home-app-preview {
+		display: table-cell;
+	}
+
+	// SUBSCRIBE SECTION
+	.subscribe-form {
+		.form-group .form-control {
+			margin: 0 3px 0 0;
+			width: 350px;
+		}
+	}
+
+	// MAP SECTION
+	#map {
+		padding: 50px 0;
+
+		#google-map {
+			display: block;
+		}
+	}
+	.contact-block {
+		background: #fff;
+
+		@font-size: 35px;
+		.item {
+			font-size: @font-size;
+			margin: 20px 0;
+
+			span {
+				width: 50px;
+			}
+			i {
+				&.fa-mobile {
+					font-size: @font-size + 5;
+				}
+				&.fa-skype {
+					font-size: @font-size;
+				}
+				&.fa-envelope {
+					font-size: @font-size - 5;
+				}
+			}
+		}
+
+		@icon-size: 55px;
+		.social {
+			margin: 50px 0 0;
+
+			li {
+				margin: 0 10px 0 0;
+
+				a {
+					font-size: 25px;
+					line-height: @icon-size;
+					width: @icon-size;
+					height: @icon-size;
+				}
+			}
+		}
+	}
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) {
+	#header {
+		.navbar-brand {
+			font-size: 35px;
+		}
+		.navbar-nav > li > a {
+			font-size: 14px;
+			margin: 0 25px;
+		}
+	}
+
+	// HOME SECTION
+	.home-app {
+		h1 {
+			font-size: 65px;
+		}
+		&-description {
+			font-size: 18px;
+			line-height: 28px;
+		}
+	}
+
+	// FACTS SECTION
+	#facts {
+		padding-bottom: 80px;
+
+	}
+	.fact-item {
+		margin-bottom: 0;
+	}
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg-min) {
+
+	// FACTS SECTION
+	.fact-item .digits {
+		font-size: 100px;
+		line-height: 100px;
+	}
+}
