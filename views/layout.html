@@ -66,7 +66,7 @@
         <script type="text/javascript" src="/assets/vendor_components/fastclick/lib/fastclick.js"></script>
 
         <!-- Sweet-Alert -->
-        <script type="text/javascript" src="/assets/vendor_components/sweetalert/sweetalert.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
         <!-- foxadmin App -->
         <script type="text/javascript" src="/static/template.js"></script>
@@ -75,19 +75,16 @@
         <script type="text/javascript"
                 src="/assets/vendor_plugins/DataTables-1.10.15/media/js/jquery.dataTables.min.js"></script>
 
-        <!-- foxadmin for Data Table -->
-        <script type="text/javascript" src="/static/pages/data-table.js"></script>
-
         <!-- foxadmin for advanced form element -->
         {# <script type="text/javascript" src="/static/pages/advanced-form-element.js" /> #}
 
-        <!-- foxadmin for Data Table -->
+        <!--  -->
         <script type="text/javascript" src="/static/optica-tech.js"></script>
     {% endblock %}
 </head>
 
 
-<body class="hold-transition skin-red sidebar-mini">
+<body class="hold-transition skin-red sidebar-collapse sidebar-mini">
 <div class="wrapper">
     <header class="main-header">
         <!-- Logo -->
@@ -127,10 +124,10 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-block btn-primary">Profile</a>
+                  <a href="#" class="btn btn-block btn-primary">Профиль</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-block btn-danger">Sign out</a>
+                  <a href="/admin/logout" class="btn btn-block btn-danger">Выйти</a>
                 </div>
               </li>
             </ul>
@@ -150,26 +147,25 @@
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">НАВИГАЦИЯ</li>
                 <li class="active">
-                    <a href="/">
-                        <i class="fa fa-dashboard"></i> <span>Статистика</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                </li>
-                <li class="">
                     <a href="/admin">
-                        <i class="fa fa-eye"></i>
-                        <span>Мои модели очков</span>
+                        <i class="fa fa-database"></i>
+                        <span>Модели очков</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
                     </a>
                 </li>
                 <li class="">
-                    <a href="#">
-                        <i class="fa fa-money"></i>
-                        <span>Оплата</span>
+                    <a href="/admin/stat">
+                        <i class="fa fa-bar-chart"></i> <span>Статистика</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/admin/docs">
+                        <i class="fa fa-question"></i> <span>Документация</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
@@ -197,7 +193,7 @@
     <footer class="main-footer">
         <div class="pull-right d-none d-sm-inline-block">
             <b>Version</b> 0.2
-        </div>&copy; 2017 Олег Креков. Все права защищены.
+        </div>&copy; 2017 Оптика.TECH. Все права защищены.
     </footer>
 </div>
 

@@ -1,20 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Онлайн-примерочная</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/images/favicon.ico">
+
+    <title>Примерочная</title>
+    <link rel="stylesheet" href="/assets/vendor_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/vendor_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/vendor_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/skins/_all-skins.css">
+    <style>
+        .app-div {
+            width: 650px;
+            margin: 1% auto;
+        }
+
+        .video-box-body {
+            background: rgba(255, 255, 255, .3);
+            padding: 5px;
+            border-top: 0;
+            color: #666;
+            border-radius: 5px;
+        }
+
+        .app-bg {
+            background: url(/images/app-bg.png) center center no-repeat #d2d6de;
+        }
+
+        .navbar-brand {
+            color: #ea5859;
+            font-family: 'Damion', cursive;
+            font-size: 24px;
+            line-height: 50px;
+            padding: 0;
+            -webkit-transition: opacity .2s ease;
+            transition: opacity .2s ease
+        }
+    </style>
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700%7CDamion">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
 </head>
-<body>
+<body class="hold-transition lockscreen app-bg">
+<div class="app-div">
+    <div class="video-box-body">
+        <div class="lockscreen-item">
+            <div class="lockscreen-name margin-top-10">
+                <h3>
+                    <a href="/"><span class="navbar-brand">optica.tech</span></a>
+                    {{ model.title }} {{ model.text }}
+                    <button id="b">Start</button>
+                </h3>
+            </div>
 
-<video id="v" style="display:none;" autoplay></video>
-<canvas id="c" height="480" width="640" style="border:1px;"></canvas>
-<button id="b">Take photo</button>
-<canvas id="d" height="100" width="100" style="display:none;"></canvas>
+            <video id="v" style="display:none;" autoplay></video>
+            <canvas id="c" height="480" width="640" style="border:1px;"></canvas>
+            <canvas id="d" height="480" width="640" style="display:none;"></canvas>
 
-
+        </div>
+    </div>
+</div>
+<script src="/assets/vendor_components/jquery/dist/jquery.min.js"></script>
+<script src="/assets/vendor_components/popper/dist/popper.min.js"></script>
+<script src="/assets/vendor_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script language="JavaScript" src="/assets/vendor_components/jquery/dist/jquery.min.js"></script>
 <script language="JavaScript">
-
 
     function drawToCanvas(imageData) {
         var canvas = document.getElementById("c");
@@ -74,6 +135,8 @@
             };
 
             var senfFunc = function () {
+
+                button.style.display='none';
 
                 var width = 640, height = 480;
                 drc.width = width;

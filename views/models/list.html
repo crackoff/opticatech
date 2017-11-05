@@ -2,14 +2,84 @@
 {% block title %}Модели{% endblock %}
 {% block head %}
     {{ super() }}
+    <style>
+        .db-img {
+            max-height: 70px;
+            max-width: 300px;
+            height: auto;
+            width: auto;
+        }
+    </style>
+    <script>
+        function delete_item(item_id) {
+            swal({
+                title: "Вы уверены?",
+                text: "Действительно удалить данную запись из вашего личного кабинета? После уделения ее восстановление станет невозможным!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                confirmButtonText: 'Yes!',
+                cancelButtonText: 'No',
+            }).then(function (willDelete) {
+                if (willDelete) {
+                    swal("Poof! Your imaginary file has been deleted!", {
+                        icon: "success",
+                    });
+                } else {
+                    swal("Your imaginary file is safe!");
+                }
+            });
+        }
+    </script>
 {% endblock %}
 {% block content %}
     <div class="box">
         <div class="box-header with-border">
-            Список моделей очков
+            <h3 class="box-title">Модели очков</h3>
         </div>
         <div class="box-body">
+            <table id="example1" class="table table-bordered table-striped table-responsive">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Изображение</th>
+                    <th>Марка</th>
+                    <th>Модель</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for entry in entries %}
+                    <tr>
+                        <td>{{ entry.id }}</td>
+                        <td>
+                            <img class="db-img" src="/images/database/{{ entry.id }}.png"/>
+                        </td>
+                        <td>{{ entry.title }}</td>
+                        <td>{{ entry.text|safe }}</td>
+                        <td>
+                            <a class="btn btn-xs btn-outline-light"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-xs btn-outline-danger" onclick="delete_item({{ entry.id }});">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
 
+            <a href="/admin/model/0" class="btn btn-large btn-primary">Добавить новую модель</a>
         </div>
     </div>
+
+    <script>
+        $(function () {
+            $('#example1').DataTable({
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/1.10.13/i18n/Russian.json"
+                }
+            });
+        });
+    </script>
+
 {% endblock %}

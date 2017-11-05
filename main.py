@@ -2,18 +2,30 @@
 
 import os
 
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, render_template
 from jinja2 import Environment, PackageLoader
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='views')
 app.config.from_object(__name__)
 app.config.update(dict(
     DATABASE=os.path.join(app.root_path, 'flaskr.db'),
-    USERNAME='admin',
-    PASSWORD='default'
+    SECRET_KEY='development key',
+    USERNAME='a@mail.ru',
+    PASSWORD='19216801'
 ))
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 env = Environment(loader=PackageLoader('main', 'views'))
+
+
+# Регистрация страниц ошибок
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('errors/404.html'), 404
+
+
+@app.errorhandler(500)
+def page_not_found(e):
+    return render_template('errors/500.html'), 500
 
 
 # Регистрация контроллеров
@@ -33,8 +45,7 @@ def init():
 @app.route('/')
 def index():
     """ Главная страница сайта """
-    template = env.get_template('landing.html')
-    return template.render()
+    return render_template('landing.html')
 
 
 @app.route('/assets/<path:path>')

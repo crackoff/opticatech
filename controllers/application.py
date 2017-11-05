@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from flask_classy import FlaskView, route
-from flask import request
+from flask import request, render_template, abort
 from main import env
 import base64
 import json
 import numpy as np
 import cv2
-from imgproc import get_detected
+from imgproc import get_mixed
+from database import get_db
 
 
 class AppController(FlaskView):
@@ -16,26 +17,36 @@ class AppController(FlaskView):
     @route('/<model_id>')
     def index(self, model_id):
         """
-        Главная и единственная страница собсвенно приложения
+        Главная и единственная страница собственно приложения
         :type model_id: int
         """
-        template = env.get_template('app.html')
-        return template.render()
+        db = get_db()
+        cur = db.execute('SELECT id, title, text FROM entries WHERE id = ?', [model_id])
+        model = cur.fetchone()
+
+        if model is None:
+            abort(404)
+
+        return render_template('app.html', model=model)
 
     @route('/process', methods=['GET', 'POST'])
     def process(self):
+        """
+        Сервисный метод для обработки видео-потока
+        """
         if request.method == 'POST':
             args = json.loads(request.data)
 
-            b = args['img']
-            bin = base64.b64decode(str(b.split(",")[1]))
-            image = np.asarray(bytearray(bin), dtype="uint8")
+            model_id = int(args["model_id"])
+            spectacles = cv2.imread('images/database/{}.png'.format(model_id))
+
+            image = args["img"]
+            image = base64.b64decode(str(image.split(",")[1]))
+            image = np.asarray(bytearray(image), dtype="uint8")
             image = cv2.imdecode(image, cv2.IMREAD_COLOR)
+            image = get_mixed(image, spectacles)
+            image = base64.b64encode(cv2.imencode('.jpg', image)[1])
 
-            image = get_detected(image)
-
-            a = base64.b64encode(cv2.imencode('.jpg', image)[1])
-
-            return "data:image/webp;base64,{}".format(a)
+            return "data:image/jpeg;base64,{}".format(image)
         else:
             return 'Use POST method'
