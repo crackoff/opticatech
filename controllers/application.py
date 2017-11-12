@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask_classy import FlaskView, route
-from flask import request, render_template, abort
+from flask import request, render_template, abort, session
 from main import env
 import base64
 import json
@@ -36,15 +36,14 @@ class AppController(FlaskView):
         """
         if request.method == 'POST':
             args = json.loads(request.data)
-
             model_id = int(args["model_id"])
-            spectacles = cv2.imread('images/database/{}.png'.format(model_id))
+            specs = cv2.imread('images/database/{}.png'.format(model_id), -1)
 
             image = args["img"]
             image = base64.b64decode(str(image.split(",")[1]))
             image = np.asarray(bytearray(image), dtype="uint8")
             image = cv2.imdecode(image, cv2.IMREAD_COLOR)
-            image = get_mixed(image, spectacles)
+            image = get_mixed(image, specs, session)
             image = base64.b64encode(cv2.imencode('.jpg', image)[1])
 
             return "data:image/jpeg;base64,{}".format(image)

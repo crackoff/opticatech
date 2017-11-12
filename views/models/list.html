@@ -58,8 +58,9 @@
                         <td>{{ entry.title }}</td>
                         <td>{{ entry.text|safe }}</td>
                         <td>
-                            <a class="btn btn-xs btn-outline-light"><i class="fa fa-edit"></i></a>
-                            <a class="btn btn-xs btn-outline-danger" onclick="delete_item({{ entry.id }});">
+                            <a href="#" class="btn btn-xs btn-outline-success"><i class="fa fa-play"></i></a>
+                            <a href="#" class="btn btn-xs btn-outline-dark"><i class="fa fa-edit"></i></a>
+                            <a href="#" class="btn btn-xs btn-outline-danger" onclick="delete_item({{ entry.id }});">
                                 <i class="fa fa-trash"></i>
                             </a>
                         </td>

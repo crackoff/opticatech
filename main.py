@@ -48,6 +48,12 @@ def index():
     return render_template('landing.html')
 
 
+@app.route('/contact')
+def contact():
+    """ Главная страница сайта """
+    return render_template('landing.html')
+
+
 @app.route('/assets/<path:path>')
 def assets(path):
     """ Папка с внешними компонентами """

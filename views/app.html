@@ -60,7 +60,6 @@
                 <h3>
                     <a href="/"><span class="navbar-brand">optica.tech</span></a>
                     {{ model.title }} {{ model.text }}
-                    <button id="b">Start</button>
                 </h3>
             </div>
 
@@ -115,11 +114,10 @@
         }
     }
 
-    navigator.mediaDevices.getUserMedia({audio: false, video: {facingMode: "user"}})
+    navigator.mediaDevices.getUserMedia({audio: false, video: {facingMode: "user", width: 640, height: 480}})
         .then(function (stream) {
 
             var video = document.getElementById("v");
-            var button = document.getElementById("b");
             var drc = document.getElementById("d");
 
             // Older browsers may not have srcObject
@@ -130,13 +128,7 @@
                 video.src = window.URL.createObjectURL(stream);
             }
 
-            video.onloadedmetadata = function (e) {
-                video.play();
-            };
-
             var senfFunc = function () {
-
-                button.style.display='none';
 
                 var width = 640, height = 480;
                 drc.width = width;
@@ -162,7 +154,10 @@
                 });
             };
 
-            button.onclick = senfFunc;
+            video.onloadedmetadata = function (e) {
+                video.play();
+                senfFunc();
+            };
         })
         .catch(function (err) {
             console.log(err.name + ": " + err.message);
